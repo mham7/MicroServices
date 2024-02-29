@@ -1,7 +1,7 @@
 using InventoryService.Data;
 using InventoryService.Interfaces;
 using InventoryService.NewFolder;
-using InventoryService.Repository;
+using InventoryService.Persistance.Repository;
 using MassTransit;
 
 var builder = WebApplication.CreateBuilder(args);

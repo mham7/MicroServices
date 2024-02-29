@@ -1,12 +1,15 @@
 using MassTransit;
+using Microsoft.Extensions.DependencyInjection;
 using ProductService.Data;
 using ProductService.Interfaces;
-using ProductService.Repository;
+using ProductService.Persistance.Repository;
 using ProductService.Service;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductLogic,ProductLogic>();
 builder.Services.AddMassTransit(busConfigurator =>

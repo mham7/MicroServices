@@ -1,5 +1,6 @@
 ﻿using Contracts;
 using MassTransit;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProductService.Interfaces;
@@ -16,6 +17,7 @@ namespace ProductService.Controllers
         private readonly IPublishEndpoint _publishEndpoint;
         public ProductController(IProductLogic product,IPublishEndpoint publishEndpoint)
         {
+            
             _product=product;
             _publishEndpoint=publishEndpoint;
         }
@@ -34,17 +36,9 @@ namespace ProductService.Controllers
         [HttpPost("Add")]
         public async Task<Product> Post(ProductDto dto)
         {
-            Product p = await _product.Post(dto);
+           return await _product.Post(dto);
             
-            await _publishEndpoint.Publish<ProductCreatedEvent>(new
-            {
-                p.ProductId,
-                p.Name,
-                p.Price,
-                p.Description,
-                p.Stock,  
-            });
-            return p;
+           
         }
 
         [HttpPut("Update")]

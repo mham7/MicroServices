@@ -21,7 +21,7 @@ namespace InventoryService.NewFolder
             {
                 ProductId = context.Message.ProductId,
                 ChangeDate=DateTime.Now,
-                QuantityChange=101,
+                QuantityChange=context.Message.Stock,
             };
             
             Debug.WriteLine(context.Message.ProductId);

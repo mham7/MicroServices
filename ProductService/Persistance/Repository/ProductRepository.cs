@@ -4,7 +4,7 @@ using ProductService.Interfaces;
 using ProductService.Model;
 using ProductService.Model.Dto;
 
-namespace ProductService.Repository
+namespace ProductService.Persistance.Repository
 {
     public class ProductRepository : IProductRepository
     {
@@ -26,7 +26,7 @@ namespace ProductService.Repository
 
         public async Task<Product> Post(ProductDto dto)
         {
-            
+
             var product = new Product
             {
                 Name = dto.Name,
@@ -41,14 +41,15 @@ namespace ProductService.Repository
             return product;
         }
 
-        public async Task Delete(int id)
+        public async Task<Product> Delete(int id)
         {
-            var product = await _context.Product.FindAsync(id);
+            Product product = await _context.Product.FindAsync(id);
             if (product != null)
             {
                 _context.Product.Remove(product);
                 await _context.SaveChangesAsync();
             }
+            return product;
         }
 
         public async Task<Product> Put(Product product)

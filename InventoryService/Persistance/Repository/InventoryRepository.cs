@@ -3,9 +3,9 @@ using InventoryService.Interfaces;
 using InventoryService.Model;
 using Microsoft.EntityFrameworkCore;
 
-namespace InventoryService.Repository
+namespace InventoryService.Persistance.Repository
 {
-    public class InventoryRepository:IIventoryRepository
+    public class InventoryRepository : IIventoryRepository
     {
         private readonly InventoryDbContext _context;
 
@@ -26,7 +26,7 @@ namespace InventoryService.Repository
         public async Task<Inventory> Post(Inventory dto)
         {
 
-            
+
 
             _context.Inventory.Add(dto);
             await _context.SaveChangesAsync();
