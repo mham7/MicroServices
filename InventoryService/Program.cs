@@ -1,4 +1,5 @@
 using InventoryService.Data;
+using InventoryService.EventConsumer;
 using InventoryService.Interfaces;
 using InventoryService.NewFolder;
 using InventoryService.Persistance.Repository;
@@ -19,6 +20,8 @@ builder.Services.AddMassTransit(busConfigurator =>
     busConfigurator.SetKebabCaseEndpointNameFormatter();
 
     busConfigurator.AddConsumer<ProductCreatedConsumer>();
+    busConfigurator.AddConsumer<ProductDeleteConsumer>();
+    busConfigurator.AddConsumer<ProductUpdateConsumer>();
 
     busConfigurator.UsingRabbitMq((context, configurator) =>
     {
