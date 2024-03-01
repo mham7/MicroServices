@@ -58,7 +58,7 @@ namespace ProductService.Service
         public async Task<Product> Put(Product product)
         {
             Product p= await _mediator.Send(new UpdateProductCommand(product));
-            await _publishEndpoint.Publish<ProductCreatedEvent>(new
+            await _publishEndpoint.Publish<ProductUpdatedEvent>(new
             {
                 p.ProductId,
                 p.Name,

@@ -19,10 +19,10 @@ builder.Services.AddDbContext<InventoryDbContext>();
 builder.Services.AddMassTransit(busConfigurator =>
 {
     busConfigurator.SetKebabCaseEndpointNameFormatter();
-
+    busConfigurator.AddConsumer<ProductUpdateConsumer>();
     busConfigurator.AddConsumer<ProductCreatedConsumer>();
     busConfigurator.AddConsumer<ProductDeleteConsumer>();
-    busConfigurator.AddConsumer<ProductUpdateConsumer>();
+  
 
     busConfigurator.UsingRabbitMq((context, configurator) =>
     {
@@ -35,6 +35,7 @@ builder.Services.AddMassTransit(busConfigurator =>
         configurator.ReceiveEndpoint("Ace", endpoint =>
         {
             endpoint.ConfigureConsumer<ProductCreatedConsumer>(context);
+            endpoint.ConfigureConsumer<ProductUpdateConsumer>(context);
         });
     });
 });
