@@ -2,6 +2,7 @@
 using InventoryService.Interfaces;
 using InventoryService.Model;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace InventoryService.Persistance.Repository
 {
@@ -33,17 +34,6 @@ namespace InventoryService.Persistance.Repository
 
             return dto;
         }
-
-        public async Task Delete(int id)
-        {
-            Inventory Inventory = await _context.Inventory.FindAsync(id);
-            if (Inventory != null)
-            {
-                _context.Inventory.Remove(Inventory);
-                await _context.SaveChangesAsync();
-            }
-        }
-
         public async Task<Inventory> Put(Inventory Inventory)
         {
             _context.Update(Inventory);
@@ -52,9 +42,23 @@ namespace InventoryService.Persistance.Repository
             return Inventory;
         }
 
-        Task<Inventory> IIventoryRepository.Delete(int id)
+        public async Task<Inventory> Delete(int id)
         {
-            throw new NotImplementedException();
+            Inventory Inventory = await _context.Inventory.FindAsync(id);
+            if (Inventory != null)
+            {
+                _context.Inventory.Remove(Inventory);
+                await _context.SaveChangesAsync();
+            }
+            return Inventory;
         }
-    }
+
+        public async Task<Inventory> Get(Expression<Func<Inventory, bool>> filter)
+        {
+            IQueryable<Inventory> inventory=_context.Inventory.Where(filter);
+            Inventory result =await inventory.FirstOrDefaultAsync();
+            return result;
+        }
+        
+    } 
 }

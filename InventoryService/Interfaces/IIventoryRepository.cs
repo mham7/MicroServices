@@ -1,4 +1,5 @@
 ﻿using InventoryService.Model;
+using System.Linq.Expressions;
 
 namespace InventoryService.Interfaces
 {
@@ -9,5 +10,6 @@ namespace InventoryService.Interfaces
         Task<Inventory> Post(Inventory a);
         Task<Inventory> Delete(int id);
         Task<Inventory> Put(Inventory inventory);
+        Task<Inventory> Get(Expression<Func<Inventory, bool>> filter);
     }
 }

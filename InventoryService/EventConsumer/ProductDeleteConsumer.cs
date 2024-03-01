@@ -3,6 +3,7 @@ using InventoryService.Interfaces;
 using InventoryService.Model;
 using MassTransit;
 using System.Diagnostics;
+using System.Linq.Expressions;
 
 namespace InventoryService.EventConsumer
 {
@@ -18,7 +19,13 @@ namespace InventoryService.EventConsumer
 
         public async Task Consume(ConsumeContext<ProductDeleteEvent> context)
         {
-            await _iven.Delete(context.Message.ProductId);
+            int pid = context.Message.ProductId;
+            Expression<Func<Inventory, bool>> predicate = item => item.ProductId == pid;
+            Inventory inven = await _iven.Get(predicate);
+            if(inven!=null) {
+                await _iven.Delete(inven.InventoryHistoryId);
+            }
+            
         }
     }
 

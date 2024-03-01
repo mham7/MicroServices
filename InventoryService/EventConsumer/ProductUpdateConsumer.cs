@@ -1,6 +1,8 @@
 ﻿using Contracts;
 using InventoryService.Interfaces;
+using InventoryService.Model;
 using MassTransit;
+using System.Linq.Expressions;
 
 namespace InventoryService.EventConsumer
 {
@@ -13,9 +15,17 @@ namespace InventoryService.EventConsumer
             _iven = iven;
         }
 
-        public Task Consume(ConsumeContext<ProductUpdatedEvent> context)
+        public async Task Consume(ConsumeContext<ProductUpdatedEvent> context)
         {
-            throw new NotImplementedException();
+            int pid = context.Message.ProductId;
+            Expression<Func<Inventory, bool>> predicate = item => item.ProductId == pid;
+            Inventory inven = await _iven.Get(predicate);
+            inven.QuantityChange = context.Message.Stock;
+            await _iven.Put(inven);
+
+            
+
+
         }
     }
 }

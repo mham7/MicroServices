@@ -24,7 +24,7 @@ namespace InventoryService.NewFolder
                 QuantityChange=context.Message.Stock,
             };
             
-            Debug.WriteLine(context.Message.ProductId);
+            
             await _iven.Post(inven);
         }
     }
