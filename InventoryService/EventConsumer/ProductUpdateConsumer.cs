@@ -1,4 +1,4 @@
-﻿using Contracts;
+﻿using Contracts.ProductEvents;
 using InventoryService.Interfaces;
 using InventoryService.Model;
 using MassTransit;
@@ -20,9 +20,12 @@ namespace InventoryService.EventConsumer
             int pid = context.Message.ProductId;
             Expression<Func<Inventory, bool>> predicate = item => item.ProductId == pid;
             Inventory inven = await _iven.Get(predicate);
-            inven.QuantityChange = context.Message.Stock;
-            await _iven.Put(inven);
-
+            if (inven != null)
+            {
+                inven.QuantityChange = inven.QuantityChange + context.Message.QuantityChange;
+                inven.ChangeDate = DateTime.Now;
+                await _iven.Put(inven);
+            }
             
 
 

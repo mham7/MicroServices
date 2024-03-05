@@ -14,6 +14,9 @@ namespace ProductService.Model
             public decimal Price { get; set; }
             [Required]
             public int Stock { get; set; }
+            
+           [Required] 
+           public required string Picture {  get; set; }
            
         }
     

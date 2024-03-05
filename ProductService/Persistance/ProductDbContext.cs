@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProductService.Model;
 
-namespace ProductService.Data
+namespace ProductService.Persistance
 {
     public class ProductDbContext:DbContext
     {
@@ -13,7 +13,7 @@ namespace ProductService.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer("Server= .\\SQLEXPRESS;Database=Products;Trusted_Connection=true;MultipleActiveResultSets=True; TrustServerCertificate=true; ");
+            optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=Products;Trusted_Connection=true;MultipleActiveResultSets=True; TrustServerCertificate=true;");
         }
 
         public DbSet<Product> Product{ get; set; }

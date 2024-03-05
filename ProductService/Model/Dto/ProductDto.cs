@@ -13,8 +13,14 @@ namespace ProductService.Model.Dto
         public decimal Price { get; set; }
 
         [Required]
-        public int Stock { get; set; }
+        public int CategoryId { get; set; }
 
-        
+        [Required]
+        public int SizeId { get; set; }
+        [Required]
+        public int ColorId { get; set; }
+
+        [Required]
+        public required string ImageUrl {  get; set; }
     }
 }

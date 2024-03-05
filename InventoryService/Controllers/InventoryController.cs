@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using InventoryService.Features.Query.GetInventoryList;
+using InventoryService.Model;
+using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InventoryService.Controllers
@@ -7,11 +10,16 @@ namespace InventoryService.Controllers
     [ApiController]
     public class InventoryController : ControllerBase
     {
-        public InventoryController()
+        private readonly IMediator _mediator;
+        public InventoryController(IMediator mediator)
         {
-            
+            _mediator = mediator;
         }
 
-
+        [HttpGet("GetAll")]
+        public async Task<List<Inventory>> Get()
+        {
+            return await _mediator.Send(new GetInventoryList());
+        }
     }
 }

@@ -36,6 +36,7 @@ builder.Services.AddMassTransit(busConfigurator =>
         {
             endpoint.ConfigureConsumer<ProductCreatedConsumer>(context);
             endpoint.ConfigureConsumer<ProductUpdateConsumer>(context);
+            endpoint.ConfigureConsumer<ProductDeleteConsumer>(context);
         });
     });
 });

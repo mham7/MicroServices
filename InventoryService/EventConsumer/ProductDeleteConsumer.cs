@@ -1,4 +1,4 @@
-﻿using Contracts;
+﻿using Contracts.ProductEvents;
 using InventoryService.Interfaces;
 using InventoryService.Model;
 using MassTransit;

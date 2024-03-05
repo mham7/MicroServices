@@ -1,12 +1,15 @@
-﻿using Contracts;
+﻿using AutoMapper;
+using Contracts.ProductEvents;
 using MassTransit;
 using MediatR;
-using ProductService.Features.Command.CreateProduct;
-using ProductService.Features.Command.DeletProduct;
-using ProductService.Features.Command.UpdateProduct;
-using ProductService.Features.Query.GetAllProduct;
-using ProductService.Features.Query.GetProduct;
-using ProductService.Interfaces;
+using ProductService.Features.Product.Command.CreateProduct;
+using ProductService.Features.Product.Command.DeletProduct;
+using ProductService.Features.Product.Command.UpdateProduct;
+using ProductService.Features.Product.Query.GetAllProduct;
+using ProductService.Features.Product.Query.GetProduct;
+using ProductService.Interfaces.Repositories;
+using ProductService.Interfaces.Services;
+using ProductService.Interfaces.Services.Utilities;
 using ProductService.Model;
 using ProductService.Model.Dto;
 
@@ -17,54 +20,54 @@ namespace ProductService.Service
         private readonly IProductRepository _repository;
         private readonly IMediator _mediator;
         private readonly IPublishEndpoint _publishEndpoint;
-        public ProductLogic(IProductRepository repository,IMediator mediator,IPublishEndpoint publishEndpoint)
+        private readonly IBlobService _blobService;
+        private readonly IMapper _mapper;
+        public ProductLogic(IProductRepository repository,IMediator mediator,IPublishEndpoint publishEndpoint,IBlobService blobService,IMapper mapper)
         {
             _mediator = mediator;
             _repository = repository;
             _publishEndpoint=publishEndpoint;
+            _blobService = blobService;
+            _mapper = mapper;
         }
         public async Task Delete(int id)
         {
             
-            await _mediator.Send(new DeleteProductCommand(id));
+            //await _mediator.Send(new DeleteProductCommand(id));
 
         }
 
-        public async Task<Product> Get(int id)
+        public async Task<Productt> Get(int id)
         {
             return await _mediator.Send(new GetProductCommand(id));
         }
 
-        public async Task<List<Product>> GetAll()
+        public async Task<List<Productt>> GetAll()
         {
             return await _mediator.Send(new GetAllProductCommand());
         }
 
-        public async Task<Product> Post(ProductDto product)
+        public async Task<Productt> Post(AddProductDto dto)
         {
-            
-            Product p=await _mediator.Send(new CreateProductCommand(product));
-            await _publishEndpoint.Publish<ProductCreatedEvent>(new
-            {
-                p.ProductId,
-                p.Name,
-                p.Price,
-                p.Description,
-                p.Stock,
-             });
+            ProductDto product = _mapper.Map<ProductDto>(dto);
+            product.ImageUrl = await _blobService.Post(dto.file);
+            Productt p=await _mediator.Send(new CreateProductCommand(dto));
+            ProductCreatedEvent addevent=_mapper.Map<ProductCreatedEvent>(p);
+            await _publishEndpoint.Publish<ProductCreatedEvent>(addevent);
             return p;
+
             }
 
-        public async Task<Product> Put(Product product)
+        public async Task<Productt> Put(Productt product)
         {
-            Product p= await _mediator.Send(new UpdateProductCommand(product));
+            Productt p= await _mediator.Send(new UpdateProductCommand(product));
             await _publishEndpoint.Publish<ProductUpdatedEvent>(new
             {
                 p.ProductId,
                 p.Name,
                 p.Price,
                 p.Description,
-                p.Stock,
+                
             });
             return p;
         }
