@@ -2,7 +2,7 @@
 using Contracts.ProductEvents;
 using MassTransit;
 using ProductService.Model;
-using ProductService.Model.Dto;
+using ProductService.Model.Dto.Product;
 using System.Data;
 using System.Threading.Tasks;
 

@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using ProductService.Model;
-using ProductService.Model.Dto;
+using ProductService.Model.Dto.Product;
 
 namespace ProductService.Features.Product.Command.CreateProduct
 {

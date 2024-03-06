@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ProductService.Model.Dto
+namespace ProductService.Model.Dto.Product
 {
     public class ProductDto
     {
@@ -21,6 +21,6 @@ namespace ProductService.Model.Dto
         public int ColorId { get; set; }
 
         [Required]
-        public required string ImageUrl {  get; set; }
+        public required string ImageUrl { get; set; }
     }
 }

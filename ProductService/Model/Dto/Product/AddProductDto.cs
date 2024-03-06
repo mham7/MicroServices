@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ProductService.Model.Dto
+namespace ProductService.Model.Dto.Product
 {
     public class AddProductDto
     {
@@ -19,8 +19,8 @@ namespace ProductService.Model.Dto
         public int SizeId { get; set; }
         [Required]
         public int ColorId { get; set; }
-        
+
         [Required]
-        public required IFormFile file { get ; set; }
+        public required IFormFile file { get; set; }
     }
 }

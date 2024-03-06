@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InventoryService", "Invento
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "Contracts\Contracts.csproj", "{70A9C8CD-3D56-4DE7-B55D-C209F423EB49}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerService", "CustomerService\CustomerService.csproj", "{AEA23ADB-B4FB-4578-841F-95E2BB131964}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerService", "CustomerService\CustomerService.csproj", "{AEA23ADB-B4FB-4578-841F-95E2BB131964}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Src", "Src", "{72F56246-B15A-4806-B091-136ADB5CF000}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,6 +44,13 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{ABD9B0E2-F889-4F1D-858E-5BE9B64C6538} = {72F56246-B15A-4806-B091-136ADB5CF000}
+		{3BF85CD9-6AEC-4996-B4B6-FC4C49B0E1AA} = {72F56246-B15A-4806-B091-136ADB5CF000}
+		{4FE9D2F8-A7B9-448A-BE30-421A8D98A494} = {72F56246-B15A-4806-B091-136ADB5CF000}
+		{70A9C8CD-3D56-4DE7-B55D-C209F423EB49} = {72F56246-B15A-4806-B091-136ADB5CF000}
+		{AEA23ADB-B4FB-4578-841F-95E2BB131964} = {72F56246-B15A-4806-B091-136ADB5CF000}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4036D5C0-1FEB-4513-ABED-F0C610544178}

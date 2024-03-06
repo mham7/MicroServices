@@ -1,5 +1,5 @@
-﻿using ProductService.Model.Dto;
-using ProductService.Model;
+﻿using ProductService.Model;
+using ProductService.Model.Dto.Product;
 
 namespace ProductService.Interfaces.Services
 {
