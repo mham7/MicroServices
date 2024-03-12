@@ -1,6 +1,7 @@
 ﻿using MediatR;
-using ProductService.Features.Generic.Query.GetCommand;
-using ProductService.Interfaces.Repositories;
+using CustomerService.Features.Generic.Query.GetCommand;
+using CustomerService.Interfaces.Repositories;
+using CustomerService.Features.Generic.Query.GetAllCommand;
 
 namespace ProductService.Features.Generic.Query.GetAllCommand
 {
