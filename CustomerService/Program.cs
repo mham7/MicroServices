@@ -1,11 +1,18 @@
+using CustomerService.Interfaces.Repositories;
+using CustomerService.Persistance.Context;
+using CustomerService.Persistance.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>)); ;
+builder.Services.AddDbContext<CustomerContext>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
 builder.Services.AddEndpointsApiExplorer();

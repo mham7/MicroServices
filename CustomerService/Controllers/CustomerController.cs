@@ -9,13 +9,13 @@ namespace CustomerService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomerController : SuperController<Customer, Customer, Customer>
+    public class CustomerController : SuperController<Customer>
     {
-        private readonly IMapper _mapper;
+      
         private readonly IMediator _mediator;
-        public CustomerController(IMediator mediator, IMapper mapper) : base(mediator, mapper)
+        public CustomerController(IMediator mediator) : base(mediator)
         {
-            _mapper = mapper;
+           
             _mediator = mediator;
         }
 

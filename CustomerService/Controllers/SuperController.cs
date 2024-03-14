@@ -12,21 +12,22 @@ namespace CustomerService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SuperController<T, X,Y> : ControllerBase where T : class where X : class where Y: class
+    public class SuperController<T> : ControllerBase where T : class 
     {
         private readonly IMediator _mediator;
-        private readonly IMapper _mapper;
+       
 
-        public SuperController(IMediator mediator, IMapper mapper)
+        public SuperController(IMediator mediator)
         {
             _mediator=mediator;
-            _mapper = mapper;
+          
         }
 
         [HttpGet]
         public virtual async Task<List<T>> Get()
         {
-            return await _mediator.Send(new GetAllCommand<T>());
+
+            return await _mediator.Send(new GetAllGenericCommand<T>());
         }
 
 
@@ -38,10 +39,10 @@ namespace CustomerService.Controllers
 
 
         [HttpPost]
-        public virtual async Task<T> Post([FromBody] X entity)
+        public virtual async Task<T> Post([FromBody] T entity)
         {
-            T mappedEntity = _mapper.Map<T>(entity);
-            return await _mediator.Send(new CreateCommand<T>(mappedEntity));
+           
+            return await _mediator.Send(new CreateCommand<T>(entity));
         }
 
 

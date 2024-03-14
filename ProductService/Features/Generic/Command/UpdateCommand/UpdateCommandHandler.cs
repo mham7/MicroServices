@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using ProductService.Features.Generic.Command.DeleteCommand;
 using ProductService.Interfaces.Repositories;
 
 namespace ProductService.Features.Generic.Command.UpdateCommand

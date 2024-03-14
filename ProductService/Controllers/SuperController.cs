@@ -27,6 +27,7 @@ namespace ProductService.Controllers
         [HttpGet]
         public virtual async Task<List<T>> Get()
         {
+            
             return await _mediator.Send(new GetAllCommand<T>());
         }
 

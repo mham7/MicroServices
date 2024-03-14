@@ -9,14 +9,29 @@ using ProductService.Service;
 using ProductService.Service.Utlities;
 using System.Reflection;
 using ProductService.Persistance.Context;
+using MediatR;
+using ProductService.Features.Generic.Query.GetCommand;
+using ProductService.Model;
+using ProductService.Features.Generic.Query.GetAllCommandHandler;
+using Autofac.Core;
+using ProductService.Features.Generic.Query.GetAllCommand;
+using ProductService.Features.Product.Query.GetAllProduct;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 
 // Add services to the container.
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+builder.Services.AddScoped(
+    typeof(IRequestHandler<GetAllCommand<Productt>, List<Productt>>),
+    typeof(GetAllCommandHandler<Productt>)
+);
+builder.Services.AddScoped(
+    typeof(IRequestHandler<GetAllCommand<Colour>, List<Colour>>),
+    typeof(GetAllCommandHandler<Colour>)
+);
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IBlobService, BlobService>();
 builder.Services.AddAutoMapper(typeof(Program), typeof(MappingProfile));

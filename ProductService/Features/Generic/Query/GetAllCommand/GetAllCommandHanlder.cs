@@ -1,13 +1,13 @@
 ﻿using MediatR;
-using ProductService.Features.Generic.Query.GetCommand;
+using ProductService.Features.Generic.Query.GetAllCommand;
 using ProductService.Interfaces.Repositories;
 
-namespace ProductService.Features.Generic.Query.GetAllCommand
+namespace ProductService.Features.Generic.Query.GetAllCommandHandler
 {
-    public class GetAllCommandHanlder<TEntity> : IRequestHandler<GetAllCommand<TEntity>, List<TEntity>> where TEntity : class
+    public class GetAllCommandHandler<TEntity> : IRequestHandler<GetAllCommand<TEntity>, List<TEntity>> where TEntity : class
     {
         private readonly IGenericRepository<TEntity> _gen;
-        public GetAllCommandHanlder(IGenericRepository<TEntity> gen)
+        public GetAllCommandHandler(IGenericRepository<TEntity> gen)
         {
             _gen = gen;
             
