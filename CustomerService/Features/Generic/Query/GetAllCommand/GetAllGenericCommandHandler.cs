@@ -3,7 +3,7 @@ using CustomerService.Features.Generic.Query.GetCommand;
 using CustomerService.Interfaces.Repositories;
 using CustomerService.Features.Generic.Query.GetAllCommand;
 
-namespace ProductService.Features.Generic.Query.GetAllCommand
+namespace CustomerService.Features.Generic.Query.GetAllCommand
 {
     public class GetAllGenericCommandHandler<TEntity> : IRequestHandler<GetAllGenericCommand<TEntity>, List<TEntity>> where TEntity : class
     {
