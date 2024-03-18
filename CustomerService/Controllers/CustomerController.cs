@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using CustomerService.Features.Generic.Command.CreateCommand;
+using CustomerService.Features.Customer.Command.CreateCustomer;
 using CustomerService.Models;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using CustomerService.Models.Dtos.Customer;
 
 namespace CustomerService.Controllers
 {
@@ -20,9 +22,16 @@ namespace CustomerService.Controllers
         }
 
         [HttpPost("Register")]
-        public async Task<Customer> Post([FromForm] Customer dto)
+        public async Task<Customer> Register([FromForm] CustomerRegisterDto dto)
         {
-            return await _mediator.Send(new CreateCommand<Customer>(dto));
+            return await _mediator.Send(new CreateCustomer(dto));
+
+        }
+        [HttpPost("OTPVerify")]
+        public async Task<IActionResult> Get([FromForm] string otp)
+        {
+            return Ok("top");
+
         }
     }
 }
