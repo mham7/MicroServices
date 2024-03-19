@@ -11,7 +11,7 @@ namespace CustomerService.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomerController : SuperController<Customer>
+    public class CustomerController : SuperController<Users>
     {
       
         private readonly IMediator _mediator;
@@ -22,7 +22,7 @@ namespace CustomerService.Controllers
         }
 
         [HttpPost("Register")]
-        public async Task<Customer> Register([FromForm] CustomerRegisterDto dto)
+        public async Task<Users> Register([FromForm] CustomerRegisterDto dto)
         {
             return await _mediator.Send(new CreateCustomer(dto));
 

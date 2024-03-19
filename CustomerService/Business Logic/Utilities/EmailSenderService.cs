@@ -11,6 +11,9 @@ namespace CustomerService.Services.Utilities
     {
         public string SendOTPMail(string otp,string email,string name)
         {
+
+
+
             
             var client = new SmtpClient("live.smtp.mailtrap.io", 587)
             {

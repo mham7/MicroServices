@@ -5,12 +5,12 @@ using MediatR;
 
 namespace CustomerService.Features.Customer.Command.CreateCustomer
 {
-    public class CreateCustomerHandler : IRequestHandler<CreateCustomer, CustomerService.Models.Customer>
+    public class CreateCustomerHandler : IRequestHandler<CreateCustomer, CustomerService.Models.Users>
     {
         private readonly IMapper _mapper;
-        private readonly IGenericRepository<CustomerService.Models.Customer> _gen;
+        private readonly IGenericRepository<CustomerService.Models.Users> _gen;
         private readonly IOTPService _otpService;
-        public CreateCustomerHandler(IGenericRepository<CustomerService.Models.Customer> gen
+        public CreateCustomerHandler(IGenericRepository<CustomerService.Models.Users> gen
             ,IOTPService oTPService,IMapper mapper)
         {
             _gen= gen;
@@ -18,12 +18,13 @@ namespace CustomerService.Features.Customer.Command.CreateCustomer
             _mapper = mapper;
             
         }
-        public async Task<Models.Customer> Handle(CreateCustomer request, CancellationToken cancellationToken)
+        public async Task<Models.Users> Handle(CreateCustomer request, CancellationToken cancellationToken)
         {
-          CustomerService.Models.Customer customer = _mapper.Map<CustomerService.Models.Customer>(request._dto);
+          CustomerService.Models.Users customer = _mapper.Map<CustomerService.Models.Users>(request._dto);
          _otpService.GenerateOTP(customer.Email, customer.FirstName);
-            //return  await _gen.Post(customer);
-            return customer;
+            //return customer;
+            return await _gen.Post(customer);
+
         }
     }
 }

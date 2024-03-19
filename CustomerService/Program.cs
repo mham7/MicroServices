@@ -22,8 +22,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 builder.Services.AddScoped(
-    typeof(IRequestHandler<GetAllGenericCommand<Customer>, List<Customer>>),
-    typeof(GetAllGenericCommandHandler<Customer>)
+    typeof(IRequestHandler<GetAllGenericCommand<Users>, List<Users>>),
+    typeof(GetAllGenericCommandHandler<Users>)
 );
 builder.Services.AddScoped(
     typeof(IRequestHandler<GetAllGenericCommand<Address>, List<Address>>),
@@ -36,7 +36,7 @@ builder.Services.AddScoped(
 //get command
 builder.Services.AddTransient<IEmailSenderService, EmailSenderService>();
 builder.Services.AddTransient<IOTPService, OtpService>();
-builder.Services.AddScoped<IRequestHandler<GetCommand<Customer>, Customer>, GetCommandHandler<Customer>>();
+builder.Services.AddScoped<IRequestHandler<GetCommand<Users>, Users>, GetCommandHandler<Users>>();
 builder.Services.AddScoped<IRequestHandler<GetCommand<Address>, Address>, GetCommandHandler<Address>>();
 builder.Services.AddScoped<IRequestHandler<GetCommand<Review>, Review>, GetCommandHandler<Review>>();
 builder.Services.AddAutoMapper(typeof(Program), typeof(MappingProfile));

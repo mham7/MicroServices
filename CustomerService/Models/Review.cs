@@ -13,5 +13,5 @@ public partial class Review
 
     public double Rating { get; set; }
 
-    public virtual Customer Customer { get; set; } = null!;
+    public virtual Users Customer { get; set; } = null!;
 }

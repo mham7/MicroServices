@@ -9,8 +9,8 @@ namespace CustomerService.Business_Logic.Utilities
         {
             public MappingProfile()
             {
-                CreateMap<CustomerRegisterDto, Customer>();
-                CreateMap<Customer, CustomerRegisterDto>();
+                CreateMap<CustomerRegisterDto, Users>();
+                CreateMap<Users, CustomerRegisterDto>();
         }
         }
     }

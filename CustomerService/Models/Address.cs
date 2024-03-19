@@ -7,7 +7,7 @@ public partial class Address
 {
     public int AddressId { get; set; }
 
-    public int CustomerId { get; set; }
+    public int UserId { get; set; }
 
     public string Street { get; set; } = null!;
 
@@ -15,5 +15,5 @@ public partial class Address
 
     public string State { get; set; } = null!;
 
-    public virtual Customer Customer { get; set; } = null!;
+    public virtual Users Customer { get; set; } = null!;
 }

@@ -4,7 +4,7 @@ using CustomerService.Models.Dtos.Customer;
 
 namespace CustomerService.Features.Customer.Command.CreateCustomer
 {
-    public class CreateCustomer : IRequest<CustomerService.Models.Customer>
+    public class CreateCustomer : IRequest<CustomerService.Models.Users>
     {
         public CreateCustomer(CustomerRegisterDto dto)
         {

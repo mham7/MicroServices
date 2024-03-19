@@ -10,7 +10,6 @@
 
         public string password { get; set; } = null!;
 
-        public int? Phone { get; set; }
 
     }
 }

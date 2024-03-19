@@ -18,7 +18,7 @@ public partial class CustomerContext : DbContext
 
     public virtual DbSet<Address> Addresses { get; set; }
 
-    public virtual DbSet<Customer> Customers { get; set; }
+    public virtual DbSet<Users> Users { get; set; }
 
     public virtual DbSet<Review> Reviews { get; set; }
 
@@ -35,7 +35,7 @@ public partial class CustomerContext : DbContext
             entity.Property(e => e.City)
                 .HasMaxLength(255)
                 .IsUnicode(false);
-            entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
+            entity.Property(e => e.UserId).HasColumnName("UserId");
             entity.Property(e => e.State)
                 .HasMaxLength(255)
                 .IsUnicode(false);
@@ -44,18 +44,18 @@ public partial class CustomerContext : DbContext
                 .IsUnicode(false);
 
             entity.HasOne(d => d.Customer).WithMany(p => p.Addresses)
-                .HasForeignKey(d => d.CustomerId)
+                .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Addresses__Custo__440B1D61");
         });
 
-        modelBuilder.Entity<Customer>(entity =>
+        modelBuilder.Entity<Users>(entity =>
         {
-            entity.HasKey(e => e.CustomerId).HasName("PK__Customer__A4AE64B8865C598F");
+            entity.HasKey(e => e.UserId).HasName("PK__User__A4AE64B8865C598F");
 
-            entity.HasIndex(e => e.Email, "UQ__Customer__A9D10534F6C40FCE").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__User__A9D10534F6C40FCE").IsUnique();
 
-            entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
+            entity.Property(e => e.UserId).HasColumnName("UserID");
             entity.Property(e => e.Email)
                 .HasMaxLength(15)
                 .IsUnicode(false);
@@ -72,7 +72,7 @@ public partial class CustomerContext : DbContext
             entity.HasKey(e => e.ReviewId).HasName("PK__Reviews__74BC79AE117C38C8");
 
             entity.Property(e => e.ReviewId).HasColumnName("ReviewID");
-            entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
+            entity.Property(e => e.CustomerId).HasColumnName("UserId");
             entity.Property(e => e.ProductId).HasColumnName("ProductID");
 
             entity.HasOne(d => d.Customer).WithMany(p => p.Reviews)

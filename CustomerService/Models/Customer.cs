@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace CustomerService.Models;
 
-public partial class Customer
+public partial class Users
 {
-    public int CustomerId { get; set; }
+    public int UserId { get; set; }
 
     public string FirstName { get; set; } = null!;
 
@@ -15,8 +15,7 @@ public partial class Customer
     
     public string password { get; set; } = null!;
 
-    public int? Phone { get; set; }
-
+    public Boolean is_active { get; set; }=false;
     public DateOnly? RegistrationDate { get; set; }
 
     public virtual ICollection<Address> Addresses { get; set; } = new List<Address>();
