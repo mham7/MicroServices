@@ -2,6 +2,6 @@
 {
     public interface IEmailSenderService
     {
-        public string SendOTPMail(string otp, string email,string name);
+        public  Task<string> SendOTPMail(string otp, string email,string name);
     }
 }

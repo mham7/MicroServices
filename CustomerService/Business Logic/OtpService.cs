@@ -17,7 +17,7 @@ namespace CustomerService.Services
         public string GenerateOTP(string email,string name)
         {
             const int otpLength = 6; 
-            var random = new SecureRandom(); 
+            var random = new SecureRandom();
             var OTP = random.Next((int)Math.Pow(10, otpLength - 1), (int)Math.Pow(10, otpLength) - 1);
             Cache.Add(email, OTP.ToString());
             _emailSender.SendOTPMail(OTP.ToString(),email,name);
