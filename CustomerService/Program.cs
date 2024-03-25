@@ -53,7 +53,7 @@ builder.Services.AddScoped<IRequestHandler<GetCommand<Review>, Review>, GetComma
 builder.Services.AddAutoMapper(typeof(Program), typeof(MappingProfile));
 builder.Services.AddAWSService<IAmazonSimpleEmailService>(new AWSOptions
 {
-    Credentials = new BasicAWSCredentials("AKIAV7GTMXMYZYZJBYWT", "iZSUWqYzm4nr6Erjkq7BwfzFJ/k68XjSJ/JBllZo"),
+    Credentials = new BasicAWSCredentials("AKIAV7GTMXMYTS3PJGO4", "AKIAV7GTMXMYZYZJBYWT"),
     Region = RegionEndpoint.APNortheast3 // Specify the appropriate region
 });
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>)); ;
