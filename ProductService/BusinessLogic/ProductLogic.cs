@@ -61,13 +61,17 @@ namespace ProductService.Service
         public async Task<Productt> Put(Productt product)
         {
             Productt p= await _mediator.Send(new UpdateProductCommand(product));
-            await _publishEndpoint.Publish<ProductUpdatedEvent>(new
+            var retry = RetryPolicy.GetRetryPolicy();
+            retry.ExecuteAsync(async () =>
             {
-                p.ProductId,
-                p.Name,
-                p.Price,
-                p.Description,
-                
+                await _publishEndpoint.Publish<ProductUpdatedEvent>(new
+                {
+                    p.ProductId,
+                    p.Name,
+                    p.Price,
+                    p.Description,
+
+                });
             });
             return p;
         }

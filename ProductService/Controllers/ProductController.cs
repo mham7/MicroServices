@@ -55,8 +55,11 @@ namespace ProductService.Controllers
         [HttpPost("Increment")]
         public async Task Post(ProductUpdatedEvent a)
         {
-
-            await _publishEndpoint.Publish<ProductUpdatedEvent>(a);
+            var retry = RetryPolicy.GetRetryPolicy();
+            retry.ExecuteAsync(async () =>
+            {
+                await _publishEndpoint.Publish<ProductUpdatedEvent>(a);
+            });
         }
         [HttpDelete("{id}")]
         public override async Task<Productt> Delete(int id)

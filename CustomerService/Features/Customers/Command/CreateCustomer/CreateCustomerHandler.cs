@@ -21,7 +21,7 @@ namespace CustomerService.Features.Customer.Command.CreateCustomer
         public async Task<Models.Users> Handle(CreateCustomer request, CancellationToken cancellationToken)
         {
           CustomerService.Models.Users customer = _mapper.Map<CustomerService.Models.Users>(request._dto);
-         _otpService.GenerateOTP(customer.Email, customer.FirstName);
+         //_otpService.GenerateOTP(customer.Email, customer.FirstName);
             //return customer;
             return await _gen.Post(customer);
 

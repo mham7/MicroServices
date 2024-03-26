@@ -16,6 +16,7 @@ using ProductService.Features.Generic.Query.GetAllCommandHandler;
 using Autofac.Core;
 using ProductService.Features.Generic.Query.GetAllCommand;
 using ProductService.Features.Product.Query.GetAllProduct;
+using System.Net.Sockets;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +32,7 @@ builder.Services.AddScoped(
     typeof(IRequestHandler<GetAllCommand<Colour>, List<Colour>>),
     typeof(GetAllCommandHandler<Colour>)
 );
+
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IBlobService, BlobService>();
